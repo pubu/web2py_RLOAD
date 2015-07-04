@@ -8,9 +8,11 @@ If you call a function by a request inside web2py, where RLOAD() is placed you w
 call:
 /default/index
 
-<script>var viewData = {{=viewData #JSON}}</script>
-<script>
-compliled react.js JSX (/default/index.jsx)
-</script>
+  <script>v
+    ar viewData = {{=viewData #JSON}}
+  </script>
+  <script>
+    compliled react.js JSX (/default/index.jsx)
+  </script>
 
 viewData comes from default/index
