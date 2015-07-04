@@ -9,14 +9,14 @@ call:
 /default/index
 
 ```html
-  <script>
-    var viewData = {{=viewData #JSON}}
-  </script>
- 
-  <div data-w2p_react_remote="default/index.jsx" id="c398468477432">bitte warten ...</div>
- 
-  <script>
-    compliled react.js JSX (/default/index.jsx)
-  </script>
+<script>
+  var viewData = {{=viewData #JSON}}
+</script>
+
+<div data-w2p_react_remote="default/index.jsx" id="c398468477432">bitte warten ...</div>
+
+<script>
+  compliled react.js JSX (/default/index.jsx)
+</script>
  ```
 viewData comes from default/index
