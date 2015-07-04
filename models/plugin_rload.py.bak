@@ -1,0 +1,68 @@
+# coding: utf8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+__author__ = 'Paul Dircksen'
+__email__ = 'p.dircksen@googlemail.com'
+__copyright__ = 'Copyright(c) 2015'
+__license__ = 'MIT'
+__version__ = '0.1'
+__status__ = 'Prototype'  # possible options: Prototype, Development, Production
+from cStringIO import StringIO
+from react import jsx
+import subprocess, random
+
+def RLOAD(url, target=None, jsx_compile_expire=600, content='bitte warten ...', **attr):
+    """  
+    LOADs a React.js component into the action's document
+
+    Args:
+        url,
+        target=None,
+        jsx_compile_expire=60, <- Cache für Kompilierte Templates
+        content='bitte warten ...',
+        attr*
+    """
+    from gluon.html import TAG, DIV, URL, SCRIPT, XML
+    # Element ID (target) zuweisen 
+    target = target or 'c' + str(random.random())[2:]
+    attr['_id'] = target
+    
+    """
+    JSX in JS umwandeln (react.js)
+    """
+    jsx_filepath = os.path.join(request.folder, 'views', url)
+    js_str = cache.ram(url+'2', lambda: transform_jsx_view(jsx_filepath), time_expire=jsx_compile_expire)
+    """
+    JSX ENDE
+    """
+    if '.' in url:
+        f, extension = url.rsplit('.', 1)
+    
+    attr['_data-w2p_react_remote'] = url
+    if not target is None:
+        if js_str:
+            # mit jsx
+            # cid einfügen - content id
+            js_str = js_str.replace('{{=cid}}', target)
+            url = url.replace('.jsx', '.json')
+            data_request_url = '/%s/%s' % (request.application, url)
+            
+            # url einfügen
+            js_str = js_str.replace('{{=url}}', data_request_url)
+            return CAT(DIV(content, **attr), SCRIPT(js_str))
+        else:
+            return DIV(content, **attr)
+            
+    
+def transform_jsx_view(jsx_filepath):
+    """
+    web2py .jsx View compilieren 
+    und js als String zurückgeben
+    """
+    js = ''
+    if jsx_filepath.endswith('.jsx'):
+        # .jsx Datei wird geöffnenet und umgewandelt
+        js_filepath = jsx_filepath.replace('.jsx', '.js')
+        js = jsx.transform(jsx_filepath)
+    return js
