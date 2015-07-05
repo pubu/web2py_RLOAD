@@ -23,6 +23,63 @@ def index():
     data = [dict(id=no, author='%d) Author Name' % no, text=teaser_text) for no in xrange(1, 1000)]
     return dict(data=data)
 
+def todo_compare():
+
+    return dict()
+
+# Helper for todo app
+def get_todo_rows():
+	# get todo rows
+    todos = db(db.todo.id > 0).select(cacheable=True)
+
+    return todos
+
+def todo():
+    """
+    Todo with react.js
+
+    MC by web2py
+    View -> .jsx
+
+    """
+    todos = get_todo_rows()
+
+    # map fieldtypes web2py -> html
+    fldType = {
+    'string' : 'text',
+    'integer' : 'integer',
+    'id'    : 'hidden',
+    'datetime' : 'date'
+    }
+
+    # load db model and translate to modelData json
+    model = []
+    for f in db.todo.fields:
+        fld = db.todo[f]
+        if fld.readable and fld.writable:
+            fld_type = fldType[fld.type]
+            if fld_type != 'hidden':
+                # IS_NOT_EMPTY = field is required
+                if isinstance(fld.requires, IS_NOT_EMPTY):
+                    fld.required = True
+                jfld = dict(name=fld.name, label=fld.label, type=fld_type, widget=fld.widget or '', comment=fld.comment, required=fld.required)
+                model.append(jfld)
+
+    return dict(model=model, data=todos)
+
+
+def todo_web2py_way():
+    """
+    Todo with web2py SQLFORM 
+    """
+    # form to add todo
+    form = SQLFORM(db.todo, formstyle="bootstrap")
+    form.process(formname='todo-form')
+
+    # get todo rows
+    todos = get_todo_rows()
+
+    return dict(form=form, data=todos)
 
 def user():
     """

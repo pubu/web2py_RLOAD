@@ -53,3 +53,16 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2015-07-05T16:40:22.704628
+CREATE TABLE todo(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    txt CHAR(255),
+    due_date TIMESTAMP,
+    todo_state CHAR(10),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
+success!

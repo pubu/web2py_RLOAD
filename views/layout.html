@@ -38,7 +38,8 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables
        HTML5 elements & feature detects -->
   <script src="{{=URL('static','js/modernizr.custom.js')}}"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+  <script src="{{=URL('static','js/formsy-react.min.js')}}"></script>
   <!-- include stylesheets -->
   {{
   response.files.insert(0,URL('static','css/web2py.css'))
@@ -90,20 +91,6 @@
   </div><!--/top navbar -->
 
   <div class="container">
-    <!-- Masthead ================================================== -->
-    <header class="mastheader row" id="header">
-      {{if response.title:}}
-        <div class="span12">
-            <div class="page-header">
-                <h1>
-                    {{=response.title}}
-                    <small>{{=response.subtitle or ''}}</small>
-                </h1>
-            </div>
-        </div>
-	{{pass}}
-    </header>
-
     <section id="main" class="main row">
         {{if left_sidebar_enabled:}}
         <div class="span3 left-sidebar">

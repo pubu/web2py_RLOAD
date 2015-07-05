@@ -20,9 +20,26 @@ def index():
     TODO: create decorator for autobinding view extension
     """
     teaser_text = """Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum"""
-    data = [dict(id=no, author='%d) Author Name' % no, text=teaser_text) for no in xrange(0, 1000)]
+    data = [dict(id=no, author='%d) Author Name' % no, text=teaser_text) for no in xrange(1, 1000)]
     return dict(data=data)
 
+def todo();
+    """
+    Todo with react.js
+    """
+    
+    
+    
+    return dict(data=data)
+
+
+def todo_web2py_way():
+    """
+    
+    
+    """
+    
+    return dict()
 
 def user():
     """

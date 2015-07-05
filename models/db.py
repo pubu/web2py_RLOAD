@@ -11,7 +11,7 @@
 
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
-    db = DAL('sqlite://storage.sqlite',pool_size=1,check_reserved=['all'])
+    db = DAL('sqlite://storage.sqlite',migrate=False, migrate_enabled=False, pool_size=1,check_reserved=['all'])
 else:
     ## connect to Google BigTable (optional 'google:datastore://namespace')
     db = DAL('google:datastore')
@@ -82,3 +82,13 @@ use_janrain(auth, filename='private/janrain.key')
 
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
+
+"""
+Todo app
+"""
+
+db.define_table('todo', 
+    Field('txt', 'string', label="What?" ,length=255, requires=IS_NOT_EMPTY()), 
+    Field('due_date', 'datetime', label="deadline", requires=IS_NOT_EMPTY()), 
+    Field('todo_state', 'string', label='state' ,length=10, requires=IS_NOT_EMPTY())
+)

@@ -1,0 +1,37 @@
+<ul>
+{{for todo in data:}}
+<li>{{=todo.txt}} {{if todo.due_date:}}{{=todo.due_date.strftime('%d.%m.%Y %H:%M')}}{{pass}}</li>
+{{pass}}
+</ul>
+
+{{=form.custom.begin}}
+	<div class="field">
+	<label><span>todo</span></label>
+	{{=form.custom.widget['txt']}}
+	</div>
+	<div class="field">
+	<label><span>due date</span></label>
+	{{=form.custom.widget['due_date']}}
+	</div>
+	<div class="actions">
+	{{=form.custom.submit}}
+	</div>
+{{=form.custom.end}}
+
+<script>
+/*
+ * viewObject - [controller][function]View
+*/
+var {{='%s%s' %( request.controller, request.function)}}View = {
+
+	viewTarget : $('#{{=request.cid}}'),
+
+    init: function() {
+    	// trap form - ajax=False
+    	$.web2py.trap_form("{{='/%s/%s/%s' % (request.application, request.controller, request.function) }}", this.viewTarget.attr('id'));
+    },
+};
+
+// init viewObject
+defaulttodo_web2py_wayView.init();
+</script>
