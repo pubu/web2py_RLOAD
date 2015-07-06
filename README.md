@@ -18,7 +18,7 @@ will create following output
 
 React.render(
 	<OwnComponent url="{{=url}}" />,
-	document.getElementById('{{=cid}}')
+	document.getElementById('random-id')
 )
 </script>
  ```
