@@ -14,7 +14,13 @@ will create following output
   var modelData = model; <- set by function call inside web2py
 </script>
 <script>
-  compliled react.js JSX (url.jsx)
+... compliled react.js JSX (url.jsx) ...
+
+React.render(
+	<OwnComponent url="{{=url}}" />,
+	document.getElementById('{{=cid}}')
+)
 </script>
  ```
-viewData comes from default/index
+
+content inside .html view will ignored by RLOAD call.
