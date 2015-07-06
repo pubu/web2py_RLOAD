@@ -73,7 +73,10 @@ def run_web2py_controller(url):
     url_list = url.split('/')
     data = run_controller_in(url_list[0], url_list[1].replace('.json', ''), current.globalenv)
     view_data = XML(response.json(data['data']))
-    model_data = XML(response.json(data['model']))
+
+    model_data = '[]'
+    if 'model' in data:
+        model_data = XML(response.json(data['model']))
     pre_js_str = """var viewData = %(view_data)s;
 var modelData = %(model)s;
     """ % dict(view_data=view_data, model=model_data)   

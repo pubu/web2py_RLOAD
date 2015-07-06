@@ -9,8 +9,10 @@
 ## - call exposes all registered services (none by default)
 #########################################################################
 
-
 def index():
+    return dict()
+
+def comments():
     """
     react.js compenent for view handling
     das MC -> web2py

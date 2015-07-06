@@ -1,2 +1,2 @@
-<script>var viewData = {{=XML(response.json(data))}};</script>
-{{=RLOAD('%s/%s.jsx' % (request.controller, request.function))}}
+{{extend 'layout.html'}}
+{{=RLOAD('%s/comments.jsx' % (request.controller))}}
